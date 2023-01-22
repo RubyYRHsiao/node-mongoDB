@@ -7,7 +7,7 @@ const createTasks = (req, res) => {
 }
 
 const getTask = (req, res) => {
-    res.json({id: req.params.id})
+    res.json({ id: req.params.id })
 }
 
 const updateTasks = (req, res) => {
