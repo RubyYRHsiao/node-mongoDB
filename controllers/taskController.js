@@ -7,7 +7,6 @@ const getAllTasks = async (req, res) => {
     } catch (e) {
         res.status(500).json({ msg: e });
     }
-
 }
 
 const createTasks = async (req, res) => {
@@ -32,8 +31,20 @@ const getTask = async (req, res) => {
     }
 }
 
-const updateTasks = (req, res) => {
-    res.json({ message: 'update task' });
+const updateTasks = async (req, res) => {
+    try {
+        const { id: taskId } = req.params;
+        const task = await Task.findOneAndUpdate({ _id: taskId }, req.body, {
+            new: true,
+            runValidators: true
+        });
+        if (!task) {
+            return res.status(404).json({ msg: `No task with id: ${taskId}` });
+        }
+        res.status(200).json(task);
+    } catch (e) {
+        res.status(500).json({ msg: e });
+    }
 }
 
 const deleteTask = async (req, res) => {
