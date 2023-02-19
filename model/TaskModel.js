@@ -1,4 +1,4 @@
-const Task = require('../models/Task');
+const Task = require('../entity/Task');
 
 const getAllTasks = () => {
     return Task.find({});
