@@ -7,6 +7,10 @@ require('dotenv').config();
 
 // middleware
 app.use(express.json());
+// TODO add static resources & path
+// app.use(express.static('./public'));
+
+// routes
 app.use('/api/v1/tasks', tasks);
 
 const start = async () => {
