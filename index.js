@@ -14,6 +14,8 @@ app.use(express.json());
 
 // route
 app.use('/api/v1/tasks', tasks);
+
+// middleware
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 
