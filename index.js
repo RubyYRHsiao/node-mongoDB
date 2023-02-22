@@ -15,7 +15,7 @@ app.use(express.json());
 // route
 app.use('/api/v1/tasks', tasks);
 app.use(notFound);
-app.use(errorHandlerMiddle);
+app.use(errorHandlerMiddleware);
 
 const start = async () => {
     try {
