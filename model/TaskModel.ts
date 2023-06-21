@@ -1,25 +1,27 @@
+import { ITask } from '../interface/Task';
+
 const Task = require('../entity/Task');
 
 const getAllTasks = () => {
     return Task.find({});
 };
 
-const createTask = (task) => {
+const createTask = (task: ITask) => {
     return Task.create(task);
 };
 
-const getTask = (taskId) => {
+const getTask = (taskId: ITask['id']) => {
     return Task.findOne({ _id: taskId });
 };
 
-const updateTask = (taskId, newTask) => {
+const updateTask = (taskId: ITask['id'], newTask: ITask) => {
     return Task.findOneAndUpdate({ _id: taskId }, newTask, {
         new: true,
         runValidators: true
     });
 }
 
-const deleteTask = (taskId) => {
+const deleteTask = (taskId: ITask['id']) => {
     return Task.findOneAndDelete({ _id: taskId });
 }
 

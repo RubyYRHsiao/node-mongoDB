@@ -1,22 +1,24 @@
 const taskModel = require('../model/TaskModel');
+const Task = require('../entity/Task');
+import { ITask } from '../interface/Task';
 
 const getAllTasks = () => {
     return taskModel.getAllTasks();
 };
 
-const createTask = (task) => {
+const createTask = (task: ITask) => {
     return taskModel.createTask(task);
 };
 
-const getTask = (taskId) => {
+const getTask = (taskId: ITask['id']) => {
     return taskModel.getTask(taskId);
 };
 
-const updateTask = (taskId, newTask) => {
+const updateTask = (taskId: ITask['id'], newTask: ITask) => {
     return taskModel.updateTask(taskId, newTask);
 }
 
-const deleteTask = (taskId) => {
+const deleteTask = (taskId: ITask['id']) => {
     return taskModel.deleteTask(taskId);
 }
 

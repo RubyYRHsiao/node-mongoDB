@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+
 const app = express();
 const port = process.env.PORT || 3000;
 const tasks = require('./route/TaskRoute');
@@ -22,7 +23,7 @@ app.use(errorHandlerMiddleware);
 const start = async () => {
     try {
         await connectDB(process.env.MONGO_URI);
-        app.listen(port, console.log(`server is listening at http://localhost:${port}`));
+        app.listen(port, () => console.log(`server is listening at http://localhost:${port}`));
     } catch (error) {
         console.log(error);
     }
