@@ -1,12 +1,14 @@
 import express from 'express';
+import tasks from './route/TaskRoute';
+import { connectDB } from './db/connect';
+import dotenv from 'dotenv';
+
+dotenv.config();
+import { notFound } from './middleware/not-found';
+import { errorHandlerMiddleware } from './middleware/error-handler';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const tasks = require('./route/TaskRoute');
-const connectDB = require('./db/connect');
-require('dotenv').config();
-const notFound = require('./middleware/not-found');
-const errorHandlerMiddleware = require('./middleware/error-handler');
 
 // middleware
 app.use(express.json());
@@ -22,7 +24,7 @@ app.use(errorHandlerMiddleware);
 
 const start = async () => {
     try {
-        await connectDB(process.env.MONGO_URI);
+        await connectDB(process.env.MONGO_URI as string);
         app.listen(port, () => console.log(`server is listening at http://localhost:${port}`));
     } catch (error) {
         console.log(error);

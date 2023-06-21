@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// TODO - Change to export syntax
 const TaskSchema = new mongoose.Schema({
     name: {
         type: String,
