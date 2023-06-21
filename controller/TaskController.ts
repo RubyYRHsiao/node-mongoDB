@@ -1,20 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
+import * as taskService from '../service/TaskService';
+import { asyncWrapper } from '../middleware/async';
+import { createCustomError } from '../error/custom-error';
 
-const taskService = require('../service/TaskService');
-const asyncWrapper = require('../middleware/async');
-const { createCustomError } = require('../error/custom-error');
-
-const getAllTasks = asyncWrapper(async (req: Request, res: Response) => {
+export const getAllTasks = asyncWrapper(async (req: Request, res: Response) => {
     const tasks = await taskService.getAllTasks();
     res.status(200).json({ status: 'success', data: { tasks } });
 });
 
-const createTask = asyncWrapper(async (req: Request, res: Response) => {
+export const createTask = asyncWrapper(async (req: Request, res: Response) => {
     const task = await taskService.createTask(req.body);
     res.status(201).json({ status: 'success', data: { task } });
 });
 
-const getTask = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
+export const getTask = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
     const { id: taskId } = req.params;
     const task = await taskService.getTask(taskId);
     if (!task) {
@@ -23,7 +22,7 @@ const getTask = asyncWrapper(async (req: Request, res: Response, next: NextFunct
     res.status(200).json({ status: 'success', data: { task } });
 });
 
-const updateTasks = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
+export const updateTasks = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
     const { id: taskId } = req.params;
     const task = await taskService.updateTask(taskId, req.body);
     if (!task) {
@@ -32,7 +31,7 @@ const updateTasks = asyncWrapper(async (req: Request, res: Response, next: NextF
     res.status(200).json({ status: 'success', data: { task } });
 });
 
-const deleteTask = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
+export const deleteTask = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
     const { id: taskId } = req.params;
     const task = await taskService.deleteTask(taskId);
     if (!task) {
@@ -40,11 +39,3 @@ const deleteTask = asyncWrapper(async (req: Request, res: Response, next: NextFu
     }
     res.status(200).json({ status: 'success', data: { task } });
 });
-
-module.exports = {
-    getAllTasks,
-    createTask,
-    getTask,
-    updateTasks,
-    deleteTask
-}

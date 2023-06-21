@@ -7,3 +7,7 @@ export class CustomAPIError extends Error {
         this.name = 'CustomAPIError';
     }
 }
+
+export const createCustomError = (message: string, statusCode: number) => {
+    return new CustomAPIError(message, statusCode);
+}
