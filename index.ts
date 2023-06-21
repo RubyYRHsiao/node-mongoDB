@@ -2,11 +2,10 @@ import express from 'express';
 import tasks from './route/TaskRoute';
 import { connectDB } from './db/connect';
 import dotenv from 'dotenv';
+import { errorHandlerMiddleware } from './middleware/error-handler';
+import { notFound } from './middleware/not-found';
 
 dotenv.config();
-import { notFound } from './middleware/not-found';
-import { errorHandlerMiddleware } from './middleware/error-handler';
-
 const app = express();
 const port = process.env.PORT || 3000;
 
