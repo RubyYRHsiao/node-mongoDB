@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-// TODO - Change to export syntax
 const TaskSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -14,4 +13,4 @@ const TaskSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Task', TaskSchema);
+export default mongoose.model('Task', TaskSchema);

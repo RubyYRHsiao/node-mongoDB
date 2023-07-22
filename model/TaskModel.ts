@@ -1,6 +1,5 @@
 import { ITask } from '../interface/ITask';
-// TODO - Change to import syntax
-const Task = require('../entity/Task');
+import Task from '../entity/Task';
 
 export const getAllTasks = () => {
     return Task.find({});
